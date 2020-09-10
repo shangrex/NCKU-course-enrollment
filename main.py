@@ -7,6 +7,7 @@ import logging
 import csv
 import argparse
 import logging
+import subprocess
 
 parser = argparse.ArgumentParser()
 
@@ -14,12 +15,10 @@ parser = argparse.ArgumentParser()
 main_page_url = "https://course.ncku.edu.tw/index.php"
 
 
-student_id = parser.add_argument("--sid", type=str, required=True, 
-                                default="F74072138")
+parser.add_argument("--sid", type=str, default="F74072138")
 
-student_psd = parser.add_argument("--psd", type=str, required=True,
-                                default="none")
-
+parser.add_argument("--psd", type=str, default="none")
+args = parser.parse_args()
 
 browser = webdriver.Chrome()
 browser.get(main_page_url)
@@ -28,12 +27,20 @@ log_url = browser.find_element_by_class_name("dsp").get_attribute("href")
 
 browser.get(log_url)
 
-student_id_button = browser.find_element_by_class_name("rwd_input1_6 rwd_input1_7")
+'''
+print(args.sid)
+print(args.psd)
+'''
+browser.find_element_by_id("user_id").send_keys(args.sid)
 
-student_pad_button = browser.find_element_by_class_name("rwd_input1_6 rwd_input1_7")
+browser.find_element_by_id("passwd").send_keys(args.psd)
 
-verify_button = browser.find_element_by_id("code")
+'''img = browser.find_element_by_class_name("click")
 
+with open('./img.png','wb') as f:
+    f.write(img)'''
+
+#browser.find_element_by_css_selector("#submit_by_acpw > span").click()
 
 # soup = BeautifulSoup(browser.page_source)
 # goal = soup.find_all("href")
