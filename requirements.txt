@@ -2,9 +2,12 @@ beautifulsoup4==4.9.1
 certifi==2020.6.20
 chardet==3.0.4
 idna==2.10
+install==1.3.3
 numpy==1.19.1
 pandas==1.1.2
+Pillow==7.2.0
 pkg-resources==0.0.0
+pytesseract==0.3.6
 python-dateutil==2.8.1
 pytz==2020.1
 requests==2.24.0
@@ -12,6 +15,3 @@ selenium==3.141.0
 six==1.15.0
 soupsieve==2.0.1
 urllib3==1.25.10
-pytesseract==0.3.6
-pillow==5.2.0
-上網載Tesseract OCR套件 version3.05.01
