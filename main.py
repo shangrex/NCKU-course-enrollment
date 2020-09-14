@@ -8,6 +8,7 @@ import csv
 import argparse
 import logging
 import subprocess
+from PIL import Image
 
 parser = argparse.ArgumentParser()
 
@@ -35,12 +36,18 @@ browser.find_element_by_id("user_id").send_keys(args.sid)
 
 browser.find_element_by_id("passwd").send_keys(args.psd)
 
-'''img = browser.find_element_by_class_name("click")
+img = browser.find_element_by_xpath("//img[@class='click']")
+browser.save_screenshot('test.jpg')
+img = Image.open('test.jpg')
+img = img.crop((910, 622, 980, 650))
+img.save('img.png', 'png')
+ocr = subprocess.Popen("tesseract /img.png /result")
+ocr.wait()
+text = open("/result.txt").read().strip()
 
-with open('./img.png','wb') as f:
-    f.write(img)'''
+browser.find_element_by_id("code").send_keys(text)
 
-#browser.find_element_by_css_selector("#submit_by_acpw > span").click()
+browser.find_element_by_css_selector("#submit_by_acpw > span").click()
 
 # soup = BeautifulSoup(browser.page_source)
 # goal = soup.find_all("href")
